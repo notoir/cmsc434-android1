@@ -63,4 +63,8 @@ public class DoodleView extends View {
         invalidate();
         return true;
     }
+
+    public void clearDoodle() {
+        _path.reset();
+    }
 }
