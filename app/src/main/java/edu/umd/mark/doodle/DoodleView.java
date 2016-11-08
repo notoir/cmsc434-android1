@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.ArrayList;
+
 /**
  * Created by Mark on 10/31/2016.
  */
@@ -16,7 +18,7 @@ import android.view.View;
 public class DoodleView extends View {
 
     private Paint _paintDoodle = new Paint();
-    private Path _path = new Path();
+    private ArrayList<Path> _paths;
 
     public DoodleView(Context context) {
         super(context);
@@ -41,20 +43,22 @@ public class DoodleView extends View {
 
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        canvas.drawPath(_path, _paintDoodle);
+        Path p = new Path();
+        _paths.add(p);
+        canvas.drawPath(p, _paintDoodle);
     }
 
     public boolean onTouchEvent(MotionEvent motionEvent) {
         float touchX = motionEvent.getX();
         float touchY = motionEvent.getY();
+        Path newestPath = _paths.get(_paths.size()-1);
 
         switch(motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                _path.moveTo(touchX, touchY);
+                newestPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
-                _path.lineTo(touchX, touchY);
+                newestPath.lineTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_UP:
                 break;
@@ -65,6 +69,16 @@ public class DoodleView extends View {
     }
 
     public void clearDoodle() {
-        _path.reset();
+        _paths.clear();
+    }
+
+    public void setBrushSize(CharSequence brushSize) {
+        if(brushSize.equals("Small")) {
+            _paintDoodle.setStrokeWidth(30);
+        } else if(brushSize.equals("Medium")) {
+            _paintDoodle.setStrokeWidth(60);
+        } else {
+            _paintDoodle.setStrokeWidth(90);
+        }
     }
 }
