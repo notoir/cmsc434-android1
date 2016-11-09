@@ -98,7 +98,11 @@ public class DoodleView extends View {
     }
 
     public void clearDoodle() {
+        for(PaintPath p : brushStrokes) {
+            p._path.reset();
+        }
         brushStrokes.clear();
+        invalidate();
     }
 
     public void setBrushSize(CharSequence brushSize) {
