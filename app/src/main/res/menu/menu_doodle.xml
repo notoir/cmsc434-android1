@@ -7,4 +7,22 @@
         app:showAsAction="ifRoom"
         android:title="brushSize">
     </item>
+    <item
+        android:id="@+id/miClear"
+        android:icon="@drawable/ic_clear"
+        app:showAsAction="ifRoom"
+        android:title="clear">
+    </item>
+    <item
+        android:id="@+id/miUndo"
+        android:icon="@drawable/ic_undo"
+        app:showAsAction="ifRoom"
+        android:title="clear">
+    </item>
+    <!--<item
+        android:id="@+id/miOpacity"
+        android:icon="@drawable/ic_opacity"
+        app:showAsAction="ifRoom"
+        android:title="clear">
+    </item>-->
 </menu>
